@@ -440,6 +440,9 @@ export default function App() {
         <div style={{ marginTop: '0.6rem', fontSize: '0.8rem', opacity: 0.6 }}>
           © {new Date().getFullYear()} Paws &amp; Groom. All rights reserved.
         </div>
+        <div style={{ marginTop: '0.4rem', fontSize: '0.75rem', opacity: 0.45 }}>
+          Powered by <a href="https://www.uphilltech.ca" target="_blank" rel="noreferrer" style={{ color: 'inherit' }}>Uphilltech</a>
+        </div>
       </footer>
     </>
   )
