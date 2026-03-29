@@ -11,23 +11,29 @@ import { GiDogBowl, GiPawHeart, GiSittingDog } from 'react-icons/gi'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 
-// Placeholder gradient images (no external URLs needed)
 const HERO_SLIDES = [
   {
-    bg: 'linear-gradient(135deg,#5c3d2e 0%,#3a9ea5 100%)',
+    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=1200&q=80',
     title: <>Your Pet Deserves the <span>Best Care</span></>,
     sub: 'Professional grooming that leaves tails wagging every time.',
   },
   {
-    bg: 'linear-gradient(135deg,#3b2318 0%,#e07b39 100%)',
+    img: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80',
     title: <>Bath, Trim &amp; <span>Full Groom</span> Packages</>,
     sub: 'Customized grooming services for all breeds and sizes.',
   },
   {
-    bg: 'linear-gradient(135deg,#1a4a4e 0%,#5c3d2e 100%)',
+    img: 'https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=1200&q=80',
     title: <>Trusted by <span>500+ Pet Owners</span> in Town</>,
     sub: "Book your furry friend's appointment today — walk-ins welcome!",
   },
+]
+
+const SVC_GALLERY = [
+  { img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=500&h=500&q=80', label: 'Bath & Style' },
+  { img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=500&h=500&q=80', label: 'Full Groom' },
+  { img: 'https://images.unsplash.com/photo-1615751072497-5f5169febe17?auto=format&fit=crop&w=500&h=500&q=80', label: 'Nail & Ear Care' },
+  { img: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=500&h=500&q=80', label: 'Happy Clients' },
 ]
 
 const SERVICES = [
@@ -173,22 +179,52 @@ export default function App() {
       <Carousel className="hero-carousel" interval={5000} fade>
         {HERO_SLIDES.map((slide, i) => (
           <Carousel.Item key={i}>
-            <div style={{ background: slide.bg, minHeight: '92vh' }} />
-            <div className="carousel-caption">
-              <h1>{slide.title}</h1>
-              <p>{slide.sub}</p>
-              <div className="d-flex gap-3 justify-content-center flex-wrap">
-                <button className="btn-grm" onClick={() => scrollTo('contact')}>
-                  📅 Book an Appointment
-                </button>
-                <button className="btn-grm-outline" onClick={() => scrollTo('services')}>
-                  Our Services
-                </button>
+            <div className="hero-slide-inner">
+              {/* Left: text panel */}
+              <div className="hero-text-panel">
+                <div className="hero-badge">🐾 Professional Pet Grooming</div>
+                <h1 className="hero-title">{slide.title}</h1>
+                <p className="hero-sub">{slide.sub}</p>
+                <div className="d-flex gap-3 flex-wrap mt-1">
+                  <button className="btn-grm" onClick={() => scrollTo('contact')}>
+                    📅 Book an Appointment
+                  </button>
+                  <button className="btn-grm-outline" onClick={() => scrollTo('services')}>
+                    Our Services
+                  </button>
+                </div>
+                <div className="hero-paws-deco" aria-hidden="true">🐾 🐾 🐾</div>
+              </div>
+              {/* Right: pet photo */}
+              <div
+                className="hero-photo-panel"
+                style={{ backgroundImage: `url(${slide.img})` }}
+              >
+                <div className="hero-photo-overlay" />
               </div>
             </div>
           </Carousel.Item>
         ))}
       </Carousel>
+
+      {/* ── Stats Bar ──────────────────────────────────────────────── */}
+      <section className="stats-bar">
+        <Container>
+          <Row className="justify-content-center g-3">
+            {[
+              { num: '500+', label: 'Happy Pets Groomed' },
+              { num: '5★', label: 'Average Google Rating' },
+              { num: '10+', label: 'Years Experience' },
+              { num: '6', label: 'Services Available' },
+            ].map((s, i) => (
+              <Col key={i} xs={6} md={3} className="stat-item">
+                <div className="stat-num">{s.num}</div>
+                <div className="stat-label">{s.label}</div>
+              </Col>
+            ))}
+          </Row>
+        </Container>
+      </section>
 
       {/* ── Services ──────────────────────────────────────────────── */}
       <section id="services" className="services-section">
@@ -200,6 +236,15 @@ export default function App() {
             <p className="mt-3" style={{ color: 'var(--grm-muted)', maxWidth: 560, margin: '1rem auto 0' }}>
               From a quick freshen-up to a full spa day — we offer everything your pet needs to look and feel their best.
             </p>
+          </div>
+          {/* Photo gallery strip */}
+          <div className="svc-gallery-strip">
+            {SVC_GALLERY.map((g, i) => (
+              <div key={i} className="svc-gallery-item">
+                <img src={g.img} alt={g.label} loading="lazy" />
+                <span className="svc-gallery-label">{g.label}</span>
+              </div>
+            ))}
           </div>
           <Row className="g-4">
             {SERVICES.map((s, i) => (

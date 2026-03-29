@@ -75,42 +75,149 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
 
 /* ── Hero Carousel ── */
 .hero-carousel .carousel-inner { min-height: 92vh; }
-.hero-carousel .carousel-item {
-  min-height: 92vh;
-  background-size: cover;
-  background-position: center;
+.hero-carousel .carousel-item { min-height: 92vh; position: relative; }
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next { z-index: 20; }
+
+/* Hero split layout */
+.hero-slide-inner { display: flex; min-height: 92vh; }
+.hero-text-panel {
+  width: 56%;
+  background: linear-gradient(160deg, #3b2318 0%, #5c3d2e 55%, #4a3020 100%);
+  padding: 4rem 2.5rem 4rem 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
   position: relative;
+  overflow: hidden;
 }
-.hero-carousel .carousel-item::after {
-  content: '';
+.hero-text-panel::before {
+  content: '🐾';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(59,35,24,0.78) 0%, rgba(59,35,24,0.45) 100%);
+  font-size: 16rem;
+  opacity: 0.04;
+  right: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
-.hero-carousel .carousel-caption {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-  text-align: center;
-  width: 90%;
-  max-width: 780px;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(224,123,57,0.18);
+  border: 1px solid rgba(224,123,57,0.4);
+  color: var(--grm-amber-lt);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  width: fit-content;
 }
-.hero-carousel .carousel-caption h1 {
-  font-size: clamp(2rem, 5vw, 3.6rem);
+.hero-title {
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
   font-weight: 700;
   color: #fff;
   line-height: 1.15;
   text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  margin: 0;
 }
-.hero-carousel .carousel-caption h1 span { color: var(--grm-amber); }
-.hero-carousel .carousel-caption p {
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
+.hero-title span { color: var(--grm-amber); }
+.hero-sub {
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
   color: #f5e0cc;
-  margin: 1rem 0 1.8rem;
+  margin: 0;
+  line-height: 1.65;
+  max-width: 480px;
 }
-.hero-carousel .carousel-control-prev,
-.hero-carousel .carousel-control-next { z-index: 20; }
+.hero-paws-deco {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-size: 1.1rem;
+  opacity: 0.25;
+  letter-spacing: 0.3rem;
+}
+.hero-photo-panel {
+  flex: 1;
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+}
+.hero-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(59,35,24,0.68) 0%, rgba(59,35,24,0.05) 45%);
+}
+
+/* Stats bar */
+.stats-bar {
+  background: var(--grm-brown-dk);
+  padding: 1.8rem 0;
+  border-top: 3px solid rgba(224,123,57,0.3);
+  border-bottom: 3px solid var(--grm-amber);
+}
+.stat-item { text-align: center; }
+.stat-item .stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--grm-amber);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.1;
+}
+.stat-item .stat-label {
+  font-size: 0.75rem;
+  color: #c8b0a0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+/* Service gallery strip */
+.svc-gallery-strip {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+.svc-gallery-strip::-webkit-scrollbar { display: none; }
+.svc-gallery-item {
+  flex: 1;
+  min-width: 160px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 6px 24px rgba(92,61,46,0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.svc-gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(92,61,46,0.28);
+}
+.svc-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+.svc-gallery-item:hover img { transform: scale(1.08); }
+.svc-gallery-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 1.8rem 1rem 0.8rem;
+  background: linear-gradient(to top, rgba(59,35,24,0.9) 0%, transparent 100%);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.04em;
+}
 
 /* ── Section Headings ── */
 .section-label {
@@ -238,5 +345,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; }
 
 @media (max-width: 768px) {
   .hero-carousel .carousel-item,
-  .hero-carousel .carousel-inner { min-height: 70vh; }
+  .hero-carousel .carousel-inner { min-height: auto; }
+  .hero-slide-inner { flex-direction: column; min-height: 70vh; }
+  .hero-photo-panel { min-height: 38vh; order: -1; }
+  .hero-text-panel { width: 100%; padding: 2.5rem 1.5rem 3rem; }
 }
